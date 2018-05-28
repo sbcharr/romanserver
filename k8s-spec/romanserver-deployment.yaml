@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: romanserver-deployment
+  labels:
+    app: romanserver
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: romanserver
+  template:
+    metadata:
+      labels:
+        app: romanserver
+    spec:
+      containers:
+      - name: romanserver
+        image: squeakysimple/romanserver:0.1
+        imagePullPolicy: Always
+        env:
+        - name: PORT
+          value: "8000"
+        ports:
+        - containerPort: 8000
